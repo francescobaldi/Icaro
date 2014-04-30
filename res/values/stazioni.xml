@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="stazioni_array">
+		<item>Torino P.Susa</item>
+		<item>Milano P.Garibaldi</item>
+		<item>Milano Rogoredo</item>
+		<item>Reggio Emilia</item>
+		<item>Venezia S.Lucia</item>
+		<item>Venezia Mestre</item>
+		<item>Padova</item>
+		<item>Bologna Centrale</item>
+		<item>Rimini</item>
+		<item>Pesaro</item>
+		<item>Ancona</item>
+		<item>Firenze S.M.N.</item>
+		<item>Roma Tiburtina</item>
+		<item>Roma Ostiense</item>
+		<item>Napoli Centrale</item>
+		<item>Salerno</item>
+	</string-array>
+    
+</resources>

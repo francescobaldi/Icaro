@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:onClick="gotoLogin" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_buy_tickets" 
+        android:onClick="gotoSearch" />
+
+    <Button
+        android:id="@+id/myTravelsButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_my_travels" 
+        android:onClick="gotoTravels" />
+
+    <Button
+        android:id="@+id/newsButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="@string/news"
+        android:onClick="gotoNews"  />
+
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gotoMap"
+        android:text="@string/map" />
+
+</LinearLayout>

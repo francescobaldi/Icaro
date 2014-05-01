@@ -1,7 +1,9 @@
 package it.sii.android.icaro;
 
 import java.util.Calendar;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,30 +43,34 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_buy_tickets);
 		
-		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
 	
-	@Override
-	public void onWindowFocusChanged (boolean hasFocus) {
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter_1 = ArrayAdapter.createFromResource(this, R.array.stazioni_array, android.R.layout.simple_spinner_item);
-		// Specify the layout to use when the list of choices appears
-		adapter_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		spinner.setAdapter(adapter_1);
-		spinner.setOnItemSelectedListener(this);
+	protected void onStart (){
+		super.onStart();
 		
+		ArrayAdapter<String> adapter = createSpinnerAdapter();
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+		spinner1.setAdapter(adapter);
+		Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+		spinner2.setAdapter(adapter);
+				
+				
 	}
 		
+	private ArrayAdapter<String> createSpinnerAdapter() {
+		String[] data = getResources().getStringArray(R.array.stazioni_array);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data);
+		return arrayAdapter;
+		
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.buy_tickets, menu);
 		return true;
@@ -96,6 +102,7 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 			View rootView = inflater.inflate(R.layout.fragment_buy_tickets,
 					container, false);
 			return rootView;
+			
 		}
 	}
 	
@@ -120,20 +127,18 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 		final LinearLayout layoutReturn2 = (LinearLayout) findViewById(R.id.layoutReturn02);
 		layoutReturn2.setVisibility(View.VISIBLE);
 	}
-
-
-
+	
+	
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View arg1, int arg2,
-			long arg3) {
+	public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		// TODO Auto-generated method stub
-	 TextView v =  	(TextView) arg1;
-      Log.d( "TESTO", v.getText().toString());
+		
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 	

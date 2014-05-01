@@ -4,6 +4,7 @@
     <string name="app_name">Icaro</string>
     <string name="hello_world">!!!</string>
     <string name="action_settings">Settings</string>
+    <string name="choose_station">scegli una stazione</string>
     <string name="title_activity_buy_tickets">compra biglietto</string>
     <string name="oneway_label">sola andata</string>
     <string name="return_label">andata e ritorno</string>

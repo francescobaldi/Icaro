@@ -14,6 +14,7 @@
     <string name="travel_type">tipo di viaggio</string>
     <string name="travel_date">data di partenza</string>
     <string name="travel_date2">data di ritorno</string>
+    <string name="date_hint">formato ../../....</string>
     <string name="set">set</string>
     <string name="empty">empty</string>
     <string name="hour">ora di partenza</string>

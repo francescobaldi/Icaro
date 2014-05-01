@@ -58,15 +58,25 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 		spinner1.setAdapter(adapter);
 		Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
 		spinner2.setAdapter(adapter);
-				
+		
+		Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
+		String[] data2 = getResources().getStringArray(R.array.passeggeri_array);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data2);
+		spinner4.setAdapter(adapter2);
+		
+		Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
+		Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
+		String[] data3 = getResources().getStringArray(R.array.orari_array);
+		ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data3);
+		spinner3.setAdapter(adapter3);
+		spinner5.setAdapter(adapter3);
 				
 	}
 		
 	private ArrayAdapter<String> createSpinnerAdapter() {
-		String[] data = getResources().getStringArray(R.array.stazioni_array);
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data);
+		String[] data1 = getResources().getStringArray(R.array.stazioni_array);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data1);
 		return arrayAdapter;
-		
 	}
 
 	@Override

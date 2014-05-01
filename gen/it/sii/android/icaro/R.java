@@ -17,8 +17,9 @@ public final class R {
         public static final int abc_slide_out_top=0x7f040005;
     }
     public static final class array {
-        public static final int passeggeri_array=0x7f0c0000;
-        public static final int stazioni_array=0x7f0c0001;
+        public static final int orari_array=0x7f0c0000;
+        public static final int passeggeri_array=0x7f0c0001;
+        public static final int stazioni_array=0x7f0c0002;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1523,50 +1524,51 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_forgot_password=0x7f0a0034;
+        public static final int action_forgot_password=0x7f0a0035;
         public static final int action_settings=0x7f0a000f;
-        public static final int action_sign_in_register=0x7f0a0032;
-        public static final int action_sign_in_short=0x7f0a0033;
+        public static final int action_sign_in_register=0x7f0a0033;
+        public static final int action_sign_in_short=0x7f0a0034;
         public static final int app_name=0x7f0a000d;
-        public static final int arrivo=0x7f0a0023;
+        public static final int arrivo=0x7f0a0024;
         public static final int choose_station=0x7f0a0010;
-        public static final int destinations=0x7f0a0021;
-        public static final int empty=0x7f0a001b;
-        public static final int error_field_required=0x7f0a0039;
-        public static final int error_incorrect_password=0x7f0a0038;
-        public static final int error_invalid_email=0x7f0a0036;
-        public static final int error_invalid_password=0x7f0a0037;
+        public static final int date_hint=0x7f0a001a;
+        public static final int destinations=0x7f0a0022;
+        public static final int empty=0x7f0a001c;
+        public static final int error_field_required=0x7f0a003a;
+        public static final int error_incorrect_password=0x7f0a0039;
+        public static final int error_invalid_email=0x7f0a0037;
+        public static final int error_invalid_password=0x7f0a0038;
         public static final int hello_world=0x7f0a000e;
-        public static final int hour=0x7f0a001c;
-        public static final int hour2=0x7f0a001d;
-        public static final int login=0x7f0a0025;
-        public static final int login_progress_signing_in=0x7f0a0035;
-        public static final int map=0x7f0a0028;
+        public static final int hour=0x7f0a001d;
+        public static final int hour2=0x7f0a001e;
+        public static final int login=0x7f0a0026;
+        public static final int login_progress_signing_in=0x7f0a0036;
+        public static final int map=0x7f0a0029;
         public static final int multi_arrivo=0x7f0a0016;
         public static final int multi_partenza=0x7f0a0015;
-        public static final int news=0x7f0a0024;
+        public static final int news=0x7f0a0025;
         public static final int oneway_label=0x7f0a0012;
-        public static final int partenza=0x7f0a0020;
-        public static final int passengers=0x7f0a001e;
+        public static final int partenza=0x7f0a0021;
+        public static final int passengers=0x7f0a001f;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f0a0030;
-        public static final int prompt_password=0x7f0a0031;
+        public static final int prompt_email=0x7f0a0031;
+        public static final int prompt_password=0x7f0a0032;
         public static final int return_label=0x7f0a0013;
-        public static final int ritorno=0x7f0a0022;
-        public static final int search_button=0x7f0a001f;
-        public static final int set=0x7f0a001a;
+        public static final int ritorno=0x7f0a0023;
+        public static final int search_button=0x7f0a0020;
+        public static final int set=0x7f0a001b;
         public static final int title_activity_buy_tickets=0x7f0a0011;
-        public static final int title_activity_confirmation=0x7f0a002e;
-        public static final int title_activity_login=0x7f0a002f;
-        public static final int title_activity_map=0x7f0a0027;
+        public static final int title_activity_confirmation=0x7f0a002f;
+        public static final int title_activity_login=0x7f0a0030;
+        public static final int title_activity_map=0x7f0a0028;
         public static final int title_activity_my_travels=0x7f0a0014;
-        public static final int title_activity_news=0x7f0a0026;
-        public static final int title_activity_payment=0x7f0a002d;
-        public static final int title_activity_train_results=0x7f0a0029;
-        public static final int title_section1=0x7f0a002a;
-        public static final int title_section2=0x7f0a002b;
-        public static final int title_section3=0x7f0a002c;
+        public static final int title_activity_news=0x7f0a0027;
+        public static final int title_activity_payment=0x7f0a002e;
+        public static final int title_activity_train_results=0x7f0a002a;
+        public static final int title_section1=0x7f0a002b;
+        public static final int title_section2=0x7f0a002c;
+        public static final int title_section3=0x7f0a002d;
         public static final int travel_date=0x7f0a0018;
         public static final int travel_date2=0x7f0a0019;
         public static final int travel_type=0x7f0a0017;

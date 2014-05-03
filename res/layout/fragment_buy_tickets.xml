@@ -75,21 +75,19 @@
             android:id="@+id/setButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:text="@string/set"
             android:layout_weight="2"  />
 
-        <EditText
-            android:id="@+id/editText1"
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:ems="10"
-            android:gravity="center|fill"
+            android:gravity="center"
             android:hint="@string/date_hint"
-            android:inputType="date" >
-
-        </EditText>
+            android:textSize="28sp"
+            android:text="" />
 
     </LinearLayout>
 
@@ -123,9 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="53dp"
             android:layout_weight="1" />
-        	<!-- android:onClick="showTimePickerDialog" -->
-           
-
+        	
         <Spinner
             android:id="@+id/spinner4"
             android:layout_width="0dp"
@@ -150,21 +146,19 @@
             android:id="@+id/setButton2"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:text="@string/set"
             android:layout_weight="2"/>
 
-        <EditText
-            android:id="@+id/editText2"
+        <TextView
+            android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:ems="10"
-            android:gravity="center|fill"
+            android:gravity="center"
             android:hint="@string/date_hint"
-            android:inputType="date" >
-
-        </EditText>
+            android:textSize="28sp"
+            android:text="" />
 
     </LinearLayout>
 
@@ -185,8 +179,7 @@
             android:layout_width="0dp"
             android:layout_height="53dp"
             android:layout_weight="1" />
-            <!-- android:onClick="showTimePickerDialog" -->
-
+        
     </LinearLayout>
 
     <LinearLayout

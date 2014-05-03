@@ -3,10 +3,14 @@ package it.sii.android.icaro;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +30,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
@@ -38,6 +44,24 @@ import android.widget.TimePicker;
 
 public class BuyTickets extends ActionBarActivity implements OnItemSelectedListener {
 
+	private static final String LOG = "Francesco";
+	
+	//DatePicker. Aggiungo come campi di istanza della activity i componenti textview e button e tre interi che conterranno l'anno, il mese e il giorno selezionati
+	protected TextView mtextView7;
+    protected Button msetButton;
+    protected TextView mtextView8;
+    protected Button msetButton2;
+    protected int mYear;
+    protected int mMonth;
+    protected int mDay;
+    protected int nYear;
+    protected int nMonth;
+    protected int nDay;
+    
+    boolean mshowed = false;
+    boolean nshowed = false;
+
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +75,13 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 	
 	protected void onStart (){
 		super.onStart();
+		
+		final TextView returnTicket = (TextView) findViewById(R.id.textView6);
+		returnTicket.setVisibility(View.GONE);
+		final LinearLayout layoutReturn = (LinearLayout) findViewById(R.id.layoutReturn);
+		layoutReturn.setVisibility(View.GONE);
+		final LinearLayout layoutReturn2 = (LinearLayout) findViewById(R.id.layoutReturn02);
+		layoutReturn2.setVisibility(View.GONE);
 		
 		ArrayAdapter<String> adapter = createSpinnerAdapter();
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,9 +101,127 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 		ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data3);
 		spinner3.setAdapter(adapter3);
 		spinner5.setAdapter(adapter3);
+		
+		
+		
+		//Vengono letti i componenti tramite gli id, viene associato un listener al bottone che apre un dialog e viene impostata come data la data odierna.
+		mtextView7 = (TextView) findViewById(R.id.textView7);
+		msetButton = (Button) findViewById(R.id.setButton);
+		mtextView8 = (TextView) findViewById(R.id.textView8);
+		msetButton2 = (Button) findViewById(R.id.setButton2);
+
+		msetButton.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	            showDialog(0);
+	        }
+	    });
+		
+		msetButton2.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	            showDialog(1);
+	        }
+	    });
+
+	    final Calendar c = Calendar.getInstance();
+	    mYear = c.get(Calendar.YEAR);
+	    mMonth = c.get(Calendar.MONTH);
+	    mDay = c.get(Calendar.DAY_OF_MONTH);
+	    nYear = c.get(Calendar.YEAR);
+	    nMonth = c.get(Calendar.MONTH);
+	    nDay = c.get(Calendar.DAY_OF_MONTH);
+	    updateDisplay();
 				
 	}
-		
+	
+	//La funzione updateDisplay() legge i valori di anno, mese e giorno e scrive nella TextView la data nel formato deciso
+	protected void updateDisplay() {
+        mtextView7.setText(
+            new StringBuilder()
+            		.append(mDay).append("/")
+            		.append(mMonth + 1).append("/")
+                    .append(mYear).append(" "));
+        
+        mtextView8.setText(
+                new StringBuilder()
+                		.append(nDay).append("/")        
+                		.append(nMonth + 1).append("/")
+                        .append(nYear).append(" "));
+    }
+	
+	//Il listener imposta la data quando viene selezionata dall'utente
+	protected DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+	            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+	            	Calendar rightNow = Calendar.getInstance();
+	            	Calendar dateObj1 = Calendar.getInstance();
+	            	mYear = year;
+	                mMonth = monthOfYear;
+	                mDay = dayOfMonth;
+	                dateObj1.set(mYear, mMonth, mDay);
+	                if(dateObj1.after(rightNow) || dateObj1.equals(rightNow)){
+	                updateDisplay();
+	                Log.v(LOG, "data ok");
+	                }
+	                else{
+	                	Log.v(LOG, "occhio, data precedente!");
+	                	if(!mshowed) { 
+	                		mshowed = true;
+		                	AlertDialog.Builder builder = new AlertDialog.Builder(BuyTickets.this);
+		                	builder.setTitle(R.string.dialog_title);
+		                	builder.setMessage(R.string.dialog_message);
+		                	builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		                		public void onClick(DialogInterface dialog, int id) {
+		                			mshowed = false;
+		                        }
+		                    });
+		                	builder.show();
+	                	}
+	                }  
+	            }
+	    };
+	    
+    protected DatePickerDialog.OnDateSetListener nDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            		Calendar dateObj1 = Calendar.getInstance();
+	            	Calendar dateObj2 = Calendar.getInstance();
+	            	nYear = year;
+	                nMonth = monthOfYear;
+	                nDay = dayOfMonth;
+	                dateObj2.set(nYear, nMonth, nDay);
+	                dateObj1.set(mYear, mMonth, mDay);
+	                //va settato per bene con l'ora di arrivo, non quella di partenza
+	                if(dateObj2.after(dateObj1) || dateObj2.equals(dateObj1)){
+	                updateDisplay();
+	                Log.v(LOG, "data ok");
+	                }
+	                else{
+	                	Log.v(LOG, "occhio, data precedente!");
+	                	if(!nshowed) { 
+	                		nshowed = true;
+		                	AlertDialog.Builder builder = new AlertDialog.Builder(BuyTickets.this);
+		                	builder.setTitle(R.string.dialog_title);
+		                	builder.setMessage(R.string.dialog_message2);
+		                	builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		                		public void onClick(DialogInterface dialog, int id) {
+		                            nshowed = false;
+		                        }
+		                    });
+		                	builder.show();
+	                	}
+	                }
+            	}
+    	};
+	    
+    /*Il dialog crea un oggetto DatePicker associato al listener appena creato. La funzione showDialog() triggera l'esecuzione dell'handler onCreateDialog().
+    Il parametro id puo' essere eventualmente utilizzato per aprire popup con un contenuto diverso.*/    
+    protected Dialog onCreateDialog(int id) {
+    	DatePickerDialog.OnDateSetListener listener;
+    	if (id==0) listener = mDateSetListener;
+    	else listener = nDateSetListener;
+        return new DatePickerDialog(this,
+                listener,
+                mYear, mMonth, mDay);
+    }
+    
 	private ArrayAdapter<String> createSpinnerAdapter() {
 		String[] data1 = getResources().getStringArray(R.array.stazioni_array);
 		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, data1);
@@ -142,46 +291,12 @@ public class BuyTickets extends ActionBarActivity implements OnItemSelectedListe
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
-		
+		// TODO Auto-generated method stub	
 	}
 	
-	
-	
-		
-	/*public static class TimePickerFragment extends DialogFragment
-								implements TimePickerDialog.OnTimeSetListener {
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			// Use the current time as the default values for the picker
-			final Calendar c = Calendar.getInstance();
-			int hour = c.get(Calendar.HOUR_OF_DAY);
-			int minute = c.get(Calendar.MINUTE);
-
-			// Create a new instance of TimePickerDialog and return it
-			return new TimePickerDialog(getActivity(), this, hour, minute,
-					DateFormat.is24HourFormat(getActivity()));
-		}
-
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			// Do something with the time chosen by the user
-		}
-		
-		public void showTimePickerDialog(View v) {
-		    DialogFragment newFragment = new TimePickerFragment();
-		    newFragment.show(getSupportFragmentManager(), "timePicker");
-		}
-		
-	}*/
-	
-	
-
 	
 }

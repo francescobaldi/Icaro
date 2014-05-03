@@ -14,10 +14,13 @@
     <string name="travel_type">tipo di viaggio</string>
     <string name="travel_date">data di partenza</string>
     <string name="travel_date2">data di ritorno</string>
-    <string name="date_hint">formato ../../....</string>
+    <string name="date_hint">../../....</string>
     <string name="set">set</string>
     <string name="empty">empty</string>
     <string name="hour">ora di partenza</string>
+    <string name="dialog_title">errore inserimento data</string>
+    <string name="dialog_message">la data scelta non può essere precedente alla data odierna.</string>
+    <string name="dialog_message2">la data di ritorno non uò essere precedente a quella di andata.</string>
     <string name="hour2">ora di ritorno</string>
     <string name="passengers">passeggeri</string>
     <string name="search_button">cerca treni</string>

@@ -64,7 +64,7 @@ public class Payment extends ActionBarActivity {
 	
 	public void gotoConfirmation(View view) {
 	    // Do something in response to button
-		Intent intent = new Intent(this, Confirmation.class);
+		Intent intent = new Intent(this, ConfirmationActivity.class);
 		startActivity(intent);
 	}
 

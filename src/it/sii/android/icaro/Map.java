@@ -1,5 +1,7 @@
 package it.sii.android.icaro;
 
+import com.google.android.gms.maps.GoogleMapOptions;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,18 +14,43 @@ import android.view.ViewGroup;
 import android.os.Build;
 
 public class Map extends ActionBarActivity {
+	
+	MapView mMapView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_map);
-
+		setContentView(R.layout.main_mapview);
+		
+		GoogleMapOptions options = new GoogleMapOptions();
+		mMapView = new MapView(this, options);
+		//mMapView = (MapView) findViewById(R.id.mymapview);
+		//mMapView.onCreate(savedInstanceState);
+		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
 
+	/*
+	@Override
+	public void onPause() {
+		super.onPause();
+		mMapView.onPause();
+	}
+	@Override
+	public void onResume() {
+	super.onResume();
+	mMapView.onResume();
+	}
+	@Override
+	public void onDestroy() {
+	super.onDestroy();
+	mMapView.onDestroy();
+	}*/
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -55,7 +82,7 @@ public class Map extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_map, container,
+			View rootView = inflater.inflate(R.layout.main_mapview, container,
 					false);
 			return rootView;
 		}

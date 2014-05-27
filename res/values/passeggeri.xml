@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="passeggeri_array">
+		
+        <item>1 passeggero</item>
+        <item>2 passeggeri</item>
+        <item>3 passeggeri</item>
+        <item>4 passeggeri</item>
+        <item>5 passeggeri</item>
+        <item>6 passeggeri</item>
+        <item>7 passeggeri</item>
+        <item>8 passeggeri</item>
+        <item>9 passeggeri</item>
+        <item>10 passeggeri</item>
+        
+	</string-array>
+    
+</resources>

@@ -253,7 +253,6 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, String> {
 		@Override
 		protected String doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
 
 			String username = mEmailView.getText().toString();
 			String password = mPasswordView.getText().toString();
@@ -262,9 +261,9 @@ public class LoginActivity extends Activity {
 			nameValuePairs.add(new BasicNameValuePair("email", username));
 			nameValuePairs.add(new BasicNameValuePair("password", password));
 			InputStream is;
-
 			String result = null;
 
+			// Connessione al Server e richiesta al DB tramite index.php
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(
@@ -315,12 +314,14 @@ public class LoginActivity extends Activity {
 			} else {
 				Gson GsonIstance = new Gson();
 				Utente user = GsonIstance.fromJson(success, Utente.class);
-				Log.v(LOG, user.getEmail()); // giusto per vedere il pacchetto
-												// di risposta
-				// salvo i dati nelle preferenze
+				// Log per vedere cosa mi rende il pacchetto Gson
+				Log.v(LOG, user.getEmail());
+				// Salvo i dati nelle preferenze
 				SharedPreferences settings = getSharedPreferences("datiLogin",
 						0);
 				SharedPreferences.Editor editor = settings.edit();
+				// ci salvo unicamente l'email per non rischiare che mi venga
+				// rubata la pswd.
 				editor.putString("Email", user.getEmail());
 				editor.commit();
 				finish();

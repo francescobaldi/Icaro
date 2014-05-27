@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="title_activity_buy_tickets">compra biglietto</string>
+    
+   	<string name="travel_type">tipo di viaggio</string>
+   	<string name="oneway_label">sola andata</string>
+   	<string name="return_label">andata e ritorno</string>
+   	<string name="destinations">stazioni</string>
+    
+    <string name="hour">ora di partenza</string>
+   	<string name="hour2">ora di ritorno</string>
+   	<string name="passengers">passeggeri</string>
+   	<string name="search_button">cerca treni</string>
+    
+   	<string name="travel_date">data di partenza</string>
+   	<string name="travel_date2">data di ritorno</string>
+   	<string name="date_hint">../../....</string>
+   	<string name="set">set</string>
+   
+   	<string name="dialog_title">errore inserimento data</string>
+   	<string name="dialog_message">la data scelta non può essere precedente alla data odierna.</string>
+   	<string name="dialog_message2">la data di ritorno non uò essere precedente a quella di andata.</string>
+    
+</resources>

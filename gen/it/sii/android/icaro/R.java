@@ -1676,15 +1676,17 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f070046;
         public static final int action_bar_title=0x7f070045;
         public static final int action_context_bar=0x7f070040;
-        public static final int action_forgot_password=0x7f070085;
+        public static final int action_forgot_password=0x7f07008f;
         public static final int action_menu_divider=0x7f070039;
         public static final int action_menu_presenter=0x7f07003a;
         public static final int action_mode_close_button=0x7f070047;
-        public static final int action_settings=0x7f070084;
+        public static final int action_settings=0x7f07008e;
         public static final int activity_chooser_view_content=0x7f070048;
         public static final int alignBounds=0x7f070016;
         public static final int alignMargins=0x7f070017;
         public static final int always=0x7f070030;
+        public static final int arrayList=0x7f070087;
+        public static final int arrivo=0x7f07008b;
         public static final int beginning=0x7f070035;
         public static final int book_now=0x7f070010;
         public static final int bottom=0x7f070019;
@@ -1701,6 +1703,8 @@ containing a value of this type.
         public static final int clip_vertical=0x7f070022;
         public static final int collapseActionView=0x7f070032;
         public static final int container=0x7f07005f;
+        public static final int dataText=0x7f070084;
+        public static final int dataView=0x7f070085;
         public static final int default_activity_button=0x7f07004b;
         public static final int destinations=0x7f07006b;
         public static final int dialog=0x7f070033;
@@ -1740,12 +1744,16 @@ containing a value of this type.
         public static final int middle=0x7f070036;
         public static final int monochrome=0x7f070013;
         public static final int myTravelsButton=0x7f070080;
-        public static final int mymapview=0x7f070083;
+        public static final int mymapview=0x7f070088;
         public static final int never=0x7f07002e;
         public static final int newsButton=0x7f070081;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070001;
         public static final int onewayRadio=0x7f070069;
+        public static final int ora1=0x7f07008c;
+        public static final int ora2=0x7f07008d;
+        public static final int partenza=0x7f07008a;
+        public static final int passeggeri=0x7f070086;
         public static final int password=0x7f070064;
         public static final int production=0x7f070007;
         public static final int progress_circular=0x7f07003b;
@@ -1753,6 +1761,7 @@ containing a value of this type.
         public static final int radio=0x7f070052;
         public static final int radioGroup=0x7f070068;
         public static final int returnRadio=0x7f07006a;
+        public static final int riga=0x7f070083;
         public static final int right=0x7f07001b;
         public static final int sandbox=0x7f070008;
         public static final int satellite=0x7f070002;
@@ -1797,6 +1806,7 @@ containing a value of this type.
         public static final int title=0x7f07004e;
         public static final int top=0x7f070018;
         public static final int top_action_bar=0x7f070043;
+        public static final int treno=0x7f070089;
         public static final int up=0x7f070044;
         public static final int useLogo=0x7f070028;
         public static final int vertical=0x7f070015;
@@ -1872,6 +1882,7 @@ containing a value of this type.
         public static final int fragment_train_results=0x7f030027;
         public static final int main_mapview=0x7f030028;
         public static final int support_simple_spinner_dropdown_item=0x7f030029;
+        public static final int train_view=0x7f03002a;
     }
     public static final class menu {
         public static final int buy_tickets=0x7f0d0000;
@@ -1925,10 +1936,10 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f05002b;
-        public static final int action_forgot_password=0x7f050046;
+        public static final int action_forgot_password=0x7f050048;
         public static final int action_settings=0x7f05002f;
-        public static final int action_sign_in_register=0x7f050044;
-        public static final int action_sign_in_short=0x7f050045;
+        public static final int action_sign_in_register=0x7f050046;
+        public static final int action_sign_in_short=0x7f050047;
         public static final int app_name=0x7f05002d;
         public static final int auth_client_needs_enabling_title=0x7f050001;
         public static final int auth_client_needs_installation_title=0x7f050002;
@@ -1936,6 +1947,10 @@ containing a value of this type.
         public static final int auth_client_play_services_err_notification_msg=0x7f050004;
         public static final int auth_client_requested_by_msg=0x7f050005;
         public static final int auth_client_using_bad_version_title=0x7f050000;
+        public static final int booking_message=0x7f05003f;
+        /**  Alert per prenotazione treno 
+         */
+        public static final int booking_title=0x7f05003e;
         public static final int cancel=0x7f05003d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
@@ -2026,47 +2041,49 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f05001e;
-        public static final int date_hint=0x7f050057;
-        public static final int destinations=0x7f050050;
-        public static final int dialog_message=0x7f05005a;
-        public static final int dialog_message2=0x7f05005b;
-        public static final int dialog_title=0x7f050059;
-        public static final int empty=0x7f050038;
-        public static final int error_field_required=0x7f05004b;
-        public static final int error_incorrect_password=0x7f05004a;
-        public static final int error_invalid_email=0x7f050048;
-        public static final int error_invalid_password=0x7f050049;
+        public static final int date_hint=0x7f050059;
+        public static final int destinations=0x7f050052;
+        public static final int dialog_message=0x7f05005c;
+        public static final int dialog_message2=0x7f05005d;
+        public static final int dialog_title=0x7f05005b;
+        public static final int empty=0x7f05003a;
+        public static final int error_field_required=0x7f05004d;
+        public static final int error_incorrect_password=0x7f05004c;
+        public static final int error_invalid_email=0x7f05004a;
+        public static final int error_invalid_password=0x7f05004b;
         public static final int hello_world=0x7f05002e;
-        public static final int hour=0x7f050051;
-        public static final int hour2=0x7f050052;
-        public static final int login=0x7f050039;
-        public static final int login_progress_signing_in=0x7f050047;
-        public static final int logout=0x7f05003a;
+        public static final int hour=0x7f050053;
+        public static final int hour2=0x7f050054;
+        public static final int login=0x7f050038;
+        public static final int login_progress_signing_in=0x7f050049;
+        public static final int logout=0x7f050039;
         public static final int logout_message=0x7f05003c;
+        /**  Alert per il logout 
+         */
         public static final int logout_title=0x7f05003b;
         public static final int map=0x7f050036;
         public static final int news=0x7f050037;
-        public static final int oneway_label=0x7f05004e;
-        public static final int passengers=0x7f050053;
-        public static final int prompt_email=0x7f050042;
-        public static final int prompt_password=0x7f050043;
-        public static final int return_label=0x7f05004f;
-        public static final int search_button=0x7f050054;
-        public static final int set=0x7f050058;
-        public static final int title_activity_buy_tickets=0x7f05004c;
+        public static final int oneway_label=0x7f050050;
+        public static final int passengers=0x7f050055;
+        public static final int prompt_email=0x7f050044;
+        public static final int prompt_password=0x7f050045;
+        public static final int return_label=0x7f050051;
+        public static final int search_button=0x7f050056;
+        public static final int set=0x7f05005a;
+        public static final int title_activity_buy_tickets=0x7f05004e;
         public static final int title_activity_confirmation=0x7f050035;
-        public static final int title_activity_login=0x7f050041;
+        public static final int title_activity_login=0x7f050043;
         public static final int title_activity_map=0x7f050033;
         public static final int title_activity_my_travels=0x7f050030;
         public static final int title_activity_news=0x7f050032;
         public static final int title_activity_payment=0x7f050034;
         public static final int title_activity_train_results=0x7f050031;
-        public static final int title_section1=0x7f05003e;
-        public static final int title_section2=0x7f05003f;
-        public static final int title_section3=0x7f050040;
-        public static final int travel_date=0x7f050055;
-        public static final int travel_date2=0x7f050056;
-        public static final int travel_type=0x7f05004d;
+        public static final int title_section1=0x7f050040;
+        public static final int title_section2=0x7f050041;
+        public static final int title_section3=0x7f050042;
+        public static final int travel_date=0x7f050057;
+        public static final int travel_date2=0x7f050058;
+        public static final int travel_type=0x7f05004f;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

@@ -266,8 +266,7 @@ public class LoginActivity extends Activity {
 			// Connessione al Server e richiesta al DB tramite index.php
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
-				HttpPost httppost = new HttpPost(
-						"http://192.168.1.111/index.php");
+				HttpPost httppost = new HttpPost(URLS.LOGIN);
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = httpclient.execute(httppost);
 				if (response.getStatusLine().getStatusCode() == 200) {
@@ -323,6 +322,7 @@ public class LoginActivity extends Activity {
 				// ci salvo unicamente l'email per non rischiare che mi venga
 				// rubata la pswd.
 				editor.putString("Email", user.getEmail());
+				editor.putString("_id", user._id);
 				editor.commit();
 				finish();
 

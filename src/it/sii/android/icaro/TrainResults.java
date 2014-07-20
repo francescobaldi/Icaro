@@ -1,18 +1,58 @@
 package it.sii.android.icaro;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.content.Intent;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class TrainResults extends ActionBarActivity {
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+public class TrainResults extends ActionBarActivity implements
+		OnItemClickListener {
+
+	List<Treno> treni = new ArrayList<>();
+	ListAdapter customAdapter;
+	String data1;
+	String data2;
+	String partenza;
+	String arrivo;
+	String orario1a;
+	String orario1b;
+	String orario2a;
+	String orario2b;
+	String passeggeri;
+	Treno trenoAndata;
+	Treno trenoRitorno;
+	boolean andata = true;
+	boolean soloAndata;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +63,38 @@ public class TrainResults extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		Bundle b = new Bundle();
+		b = getIntent().getExtras();
+		partenza = b.getString("partenza");
+		arrivo = b.getString("arrivo");
+		orario1a = b.getString("orario1a");
+		orario1b = b.getString("orario1b");
+		orario2a = b.getString("orario2a");
+		orario2b = b.getString("orario2b");
+		passeggeri = b.getString("passeggeri");
+		data1 = b.getString("data1");
+		data2 = b.getString("data2");
+		soloAndata = b.getBoolean("soloAndata");
+
+		TextView data = (TextView) findViewById(R.id.dataView);
+		data.setText(this.data1);
+		TextView passeggeriView = (TextView) findViewById(R.id.passeggeri);
+		passeggeriView.setText(this.passeggeri + " passeggero/i");
+
+		aggiornaLista(partenza, arrivo, orario1a, orario1b, passeggeri, data1);
+
+		ListView listView = (ListView) findViewById(R.id.arrayList);
+		customAdapter = new ListAdapter(this, R.layout.train_view, treni);
+		listView.setAdapter(customAdapter);
+		listView.setOnItemClickListener(this);
+		andata = true;
+
 	}
 
 	@Override
@@ -61,11 +133,193 @@ public class TrainResults extends ActionBarActivity {
 			return rootView;
 		}
 	}
-	
-	public void gotoPayment(View view) {
-	    // Do something in response to button
-		Intent intent = new Intent(this, Payment.class);
-		startActivity(intent);
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, final int position,
+			long arg3) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(TrainResults.this);
+		builder.setTitle(R.string.booking_title);
+		builder.setMessage(R.string.booking_message);
+		builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+
+				Thread set = new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						onTrainSelected(treni.get(position));
+
+					}
+				});
+				set.start();
+
+			}
+		});
+		builder.setNegativeButton(R.string.cancel,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// non fa nulla
+					}
+				});
+		builder.show();
+
 	}
 
+	public void onTrainSelected(Treno t) {
+		if (andata) {
+			trenoAndata = t;
+		} else {
+			trenoRitorno = t;
+		}
+
+		if (soloAndata) {
+			sendBooking(trenoAndata, data1);
+			showBookingDone();
+		} else if (!soloAndata && andata) {
+			aggiornaLista(arrivo, partenza, orario2a, orario2b, passeggeri,
+					data2);
+		} else if (!soloAndata && !andata) {
+			sendBooking(trenoAndata, data1);
+			sendBooking(trenoRitorno, data2);
+			showBookingDone();
+		}
+
+		andata = !andata;
+	}
+
+	public void sendBooking(Treno t, String data) {
+		// prendo l'id utente per usarlo con la prenotazione
+		String id = null;
+		SharedPreferences settings = getSharedPreferences("datiLogin", 0);
+		id = settings.getString("_id", "");
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("treno", t.Treno));
+		nameValuePairs.add(new BasicNameValuePair("data", data));
+		nameValuePairs.add(new BasicNameValuePair("user_id", id));
+		nameValuePairs.add(new BasicNameValuePair("passeggeri", t.Passeggeri));
+
+		// Connessione al Server e richiesta al DB tramite prenotazioni.php
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost(URLS.PRENOTAZIONI);
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+			if (response.getStatusLine().getStatusCode() != 200) {
+
+				// Gestisci errore
+
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void showBookingDone() {
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(),
+						"prenotazione riuscita", Toast.LENGTH_SHORT).show();
+
+			}
+		});
+
+	}
+
+	public void aggiornaLista(final String partenza, final String arrivo,
+			String ora1, String ora2, final String passeggeri, final String data) {
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+
+				// bundle di extra in arrivo dall'intent dell'activity
+				// BuyTickets
+
+				// array per la chiamata http
+				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs
+						.add(new BasicNameValuePair("partenza", partenza));
+				nameValuePairs.add(new BasicNameValuePair("arrivo", arrivo));
+				nameValuePairs
+						.add(new BasicNameValuePair("orario1a", orario1a));
+				nameValuePairs
+						.add(new BasicNameValuePair("orario2a", orario2a));
+				nameValuePairs
+						.add(new BasicNameValuePair("orario1b", orario1b));
+				nameValuePairs
+						.add(new BasicNameValuePair("orario2b", orario2b));
+				InputStream is;
+				String result = null;
+
+				// Connessione al Server e richiesta al DB tramite treni.php
+				try {
+					DefaultHttpClient httpclient = new DefaultHttpClient();
+					HttpPost httppost = new HttpPost(URLS.TRENI);
+					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+					HttpResponse response = httpclient.execute(httppost);
+					if (response.getStatusLine().getStatusCode() == 200) {
+						HttpEntity entity = response.getEntity();
+						is = entity.getContent();
+						BufferedReader reader = new BufferedReader(
+								new InputStreamReader(is, "UTF-8"), 8);
+						StringBuilder sb = new StringBuilder();
+
+						String line = null;
+						while ((line = reader.readLine()) != null) {
+							sb.append(line + "\n");
+						}
+						is.close();
+						result = sb.toString();
+
+						Gson GsonIstance = new Gson();
+						// viene creata una lista temporanea "tmp" con GSon e
+						// poi tutti i record vengono aggiunti alla lista
+						// "treni"
+						List<Treno> tmp = GsonIstance.fromJson(result,
+								new TypeToken<List<Treno>>() {
+								}.getType());
+						// per ogni record aggiungo i dati mancanti dalla query
+						// SQL
+						for (Treno t : tmp) {
+							t.StazionePartenza = partenza;
+							t.StazioneArrivo = arrivo;
+							t.Data = data;
+							t.Passeggeri = passeggeri;
+						}
+
+						treni.clear();
+						treni.addAll(tmp);
+
+						runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								customAdapter.notifyDataSetChanged();
+
+							}
+						});
+
+						// Log per vedere cosa mi rende il pacchetto Gson
+						Log.v("LOG", treni.toString());
+
+					}
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		});
+		t.start();
+
+	}
 }

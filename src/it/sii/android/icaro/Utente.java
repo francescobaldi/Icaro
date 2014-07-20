@@ -1,6 +1,7 @@
 package it.sii.android.icaro;
 
 public class Utente {
+	public String _id;
 	private String email;
 	private String password;
 

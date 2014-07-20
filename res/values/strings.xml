@@ -23,6 +23,11 @@
     <string name="logout_message">il logout non permetterà di effettuare prenotazioni o consultare i propri biglietti acquistati</string>
     <string name="cancel">ANNULLA</string>
     
+    <!-- Alert per prenotazione treno -->
+    <string name="booking_title">Conferma Prenotazione</string>
+    <string name="booking_message">Si conferma di voler prenotare il treno per la data ed il numero di passeggeri indicati?</string>
+    
+    
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>

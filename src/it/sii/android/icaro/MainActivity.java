@@ -157,6 +157,7 @@ public class MainActivity extends ActionBarActivity {
 						0);
 				SharedPreferences.Editor editor = settings.edit();
 				editor.putString("Email", null);
+				editor.putString("_id", null);
 				editor.commit();
 				// refresha l'activity
 				Intent intent = getIntent();

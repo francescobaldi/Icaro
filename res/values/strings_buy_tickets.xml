@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="title_activity_buy_tickets">compra biglietto</string>
+    <string name="title_activity_buy_tickets">prenota biglietto</string>
     
    	<string name="travel_type">tipo di viaggio</string>
    	<string name="oneway_label">sola andata</string>

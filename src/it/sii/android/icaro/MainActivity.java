@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void gotoNews(View view) {
-		Intent intent = new Intent(this, News.class);
+		Intent intent = new Intent(this, NewsMeteo.class);
 		startActivity(intent);
 	}
 
@@ -151,8 +151,6 @@ public class MainActivity extends ActionBarActivity {
 		builder.setMessage(R.string.logout_message);
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				// TODO effettuare il logout, settare la visibilità e poi pulire
-				// le shared preferences.
 				SharedPreferences settings = getSharedPreferences("datiLogin",
 						0);
 				SharedPreferences.Editor editor = settings.edit();

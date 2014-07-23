@@ -133,7 +133,7 @@ public class LoginActivity extends Activity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
-			// TODO: If Settings has multiple levels, Up should navigate up
+			// If Settings has multiple levels, Up should navigate up
 			// that hierarchy.
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
@@ -286,10 +286,8 @@ public class LoginActivity extends Activity {
 				}
 
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

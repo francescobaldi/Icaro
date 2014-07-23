@@ -15,8 +15,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -40,6 +43,7 @@ public class TrainResults extends ActionBarActivity implements
 
 	List<Treno> treni = new ArrayList<>();
 	ListAdapter customAdapter;
+	TextView data;
 	String data1;
 	String data2;
 	String partenza;
@@ -82,7 +86,7 @@ public class TrainResults extends ActionBarActivity implements
 		data2 = b.getString("data2");
 		soloAndata = b.getBoolean("soloAndata");
 
-		TextView data = (TextView) findViewById(R.id.dataView);
+		data = (TextView) findViewById(R.id.dataView);
 		data.setText(this.data1);
 		TextView passeggeriView = (TextView) findViewById(R.id.passeggeri);
 		passeggeriView.setText(this.passeggeri + " passeggero/i");
@@ -147,7 +151,6 @@ public class TrainResults extends ActionBarActivity implements
 
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 
 						onTrainSelected(treni.get(position));
 
@@ -180,6 +183,11 @@ public class TrainResults extends ActionBarActivity implements
 		} else if (!soloAndata && andata) {
 			aggiornaLista(arrivo, partenza, orario2a, orario2b, passeggeri,
 					data2);
+
+			// TODO non va messo qui l'aggiornamento della view?
+			// data = (TextView) findViewById(R.id.dataView);
+			// data.setText(this.data2);
+
 		} else if (!soloAndata && !andata) {
 			sendBooking(trenoAndata, data1);
 			sendBooking(trenoRitorno, data2);
@@ -214,9 +222,22 @@ public class TrainResults extends ActionBarActivity implements
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		DatabaseManager dbHelper = new DatabaseManager(this, "icaro", null,
+				DatabaseManager.DB_VERSION);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		ContentValues cValues = new ContentValues();
+		cValues.put("Treno", t.Treno);
+		cValues.put("StazionePartenza", t.StazionePartenza);
+		cValues.put("StazioneArrivo", t.StazioneArrivo);
+		cValues.put("OrarioPartenza", t.OrarioPartenza);
+		cValues.put("OrarioArrivo", t.OrarioArrivo);
+		cValues.put("Data", t.Data);
+		cValues.put("Passeggeri", t.Passeggeri);
+		db.insert("treno", null, cValues);
+		db.close();
 
 	}
 
@@ -225,13 +246,12 @@ public class TrainResults extends ActionBarActivity implements
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				Toast.makeText(getApplicationContext(),
-						"prenotazione riuscita", Toast.LENGTH_SHORT).show();
+						"prenotazione riuscita", Toast.LENGTH_LONG).show();
 
 			}
 		});
-
+		this.gotoMain(null);
 	}
 
 	public void aggiornaLista(final String partenza, final String arrivo,
@@ -301,7 +321,7 @@ public class TrainResults extends ActionBarActivity implements
 
 							@Override
 							public void run() {
-								// TODO Auto-generated method stub
+
 								customAdapter.notifyDataSetChanged();
 
 							}
@@ -313,7 +333,7 @@ public class TrainResults extends ActionBarActivity implements
 					}
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
@@ -321,5 +341,10 @@ public class TrainResults extends ActionBarActivity implements
 		});
 		t.start();
 
+	}
+
+	public void gotoMain(View view) {
+		Intent intent = new Intent(this, MyTravels.class);
+		startActivity(intent);
 	}
 }

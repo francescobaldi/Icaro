@@ -1,11 +1,33 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- 	xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <com.google.android.gms.maps.MapView android:id="@+id/mymapview"
-    	android:layout_width="match_parent" 
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+    
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mymapview"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" 
-    />
-</LinearLayout>
- 
+        
+		xmlns:map="http://schemas.android.com/apk/res-auto"
+		
+		map:cameraTargetLat="41.29246"
+		map:cameraTargetLng="12.5736108"
+	    map:cameraZoom="5"
+  		map:uiCompass="true"
+    >
+    </com.google.android.gms.maps.MapView>
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:layout_gravity="bottom|center_horizontal"
+		android:id="@+id/buttonLayout">
+		<Button 
+		    android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:id="@+id/centerMapButton"
+			android:onClick="centerMap"
+			android:text="@string/center_map_label">
+		</Button>
+			
+	</LinearLayout>
+</merge>

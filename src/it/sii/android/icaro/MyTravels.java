@@ -1,17 +1,26 @@
 package it.sii.android.icaro;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
 
 public class MyTravels extends ActionBarActivity {
+
+	private SQLiteDatabase db;
+	private Cursor cursor;
+	private CursorAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +31,40 @@ public class MyTravels extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		DatabaseManager dbHelper = new DatabaseManager(this, "icaro", null,
+				DatabaseManager.DB_VERSION);
+		db = dbHelper.getWritableDatabase();
+		String sql = "SELECT Treno, StazionePartenza, StazioneArrivo, OrarioPartenza, OrarioArrivo, Data, Passeggeri FROM Treno";
+		cursor = db.rawQuery(sql, null);
+
+		List<Treno> treni = new ArrayList<Treno>();
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Treno t = new Treno();
+				t.Treno = cursor.getString(0);
+				t.StazionePartenza = cursor.getString(1);
+				t.StazioneArrivo = cursor.getString(2);
+				t.OrarioPartenza = cursor.getString(3);
+				t.OrarioArrivo = cursor.getString(4);
+				t.Data = cursor.getString(5);
+				t.Passeggeri = cursor.getString(6);
+				treni.add(t);
+			} while (cursor.moveToNext());
+		}
+
+		ListView listView = (ListView) findViewById(R.id.prenotazioniList);
+		ListAdapterPrenotazioni customAdapter = new ListAdapterPrenotazioni(
+				this, R.layout.booking_view, treni);
+		listView.setAdapter(customAdapter);
+		customAdapter.notifyDataSetChanged();
+
 	}
 
 	@Override

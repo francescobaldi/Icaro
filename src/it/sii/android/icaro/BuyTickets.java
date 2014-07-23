@@ -195,7 +195,8 @@ public class BuyTickets extends ActionBarActivity implements
 			nDay = dayOfMonth;
 			dateObj2.set(nYear, nMonth, nDay);
 			dateObj1.set(mYear, mMonth, mDay);
-			// va settato per bene con l'ora di arrivo, non quella di partenza
+			// TODO va settato per bene con l'ora di arrivo, non quella di
+			// partenza
 			if (dateObj2.after(dateObj1) || dateObj2.equals(dateObj1)) {
 				updateDisplay();
 				Log.v(LOG, "data ok");
@@ -363,12 +364,12 @@ public class BuyTickets extends ActionBarActivity implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
+
 	}
 
 }

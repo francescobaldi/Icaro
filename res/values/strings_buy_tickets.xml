@@ -20,6 +20,6 @@
    
    	<string name="dialog_title">errore inserimento data</string>
    	<string name="dialog_message">la data scelta non può essere precedente alla data odierna.</string>
-   	<string name="dialog_message2">la data di ritorno non uò essere precedente a quella di andata.</string>
+   	<string name="dialog_message2">la data di ritorno non può essere precedente a quella di andata.</string>
     
 </resources>

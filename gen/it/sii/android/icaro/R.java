@@ -1670,13 +1670,6 @@ containing a value of this type.
     }
     public static final class id {
         public static final int a1=0x7f07008a;
-        public static final int a2=0x7f070092;
-        public static final int a3=0x7f070093;
-        public static final int a4=0x7f070094;
-        public static final int a5=0x7f070095;
-        public static final int a6=0x7f070096;
-        public static final int a7=0x7f070097;
-        public static final int a8=0x7f070098;
         public static final int action_bar=0x7f07003f;
         public static final int action_bar_activity_content=0x7f070038;
         public static final int action_bar_container=0x7f07003e;
@@ -1711,7 +1704,7 @@ containing a value of this type.
         public static final int classic=0x7f070011;
         public static final int clip_horizontal=0x7f070023;
         public static final int clip_vertical=0x7f070022;
-        public static final int clouds=0x7f07008f;
+        public static final int clouds=0x7f070093;
         public static final int collapseActionView=0x7f070032;
         public static final int container=0x7f07005f;
         public static final int data=0x7f07006c;
@@ -1736,7 +1729,7 @@ containing a value of this type.
         public static final int home=0x7f070037;
         public static final int homeAsUp=0x7f07002a;
         public static final int horizontal=0x7f070014;
-        public static final int humidity=0x7f07008d;
+        public static final int humidity=0x7f07008f;
         public static final int hybrid=0x7f070004;
         public static final int icon=0x7f07004d;
         public static final int ifRoom=0x7f07002f;
@@ -1770,13 +1763,13 @@ containing a value of this type.
         public static final int passeggeri=0x7f07006d;
         public static final int password=0x7f070064;
         public static final int prenotazioniList=0x7f070089;
-        public static final int pressure=0x7f07008e;
+        public static final int pressure=0x7f070091;
         public static final int production=0x7f070007;
         public static final int progress_circular=0x7f07003b;
         public static final int progress_horizontal=0x7f07003c;
         public static final int radio=0x7f070052;
         public static final int radioGroup=0x7f07006f;
-        public static final int rain=0x7f070090;
+        public static final int rain=0x7f070095;
         public static final int returnRadio=0x7f070071;
         public static final int riga=0x7f070099;
         public static final int right=0x7f07001b;
@@ -1811,7 +1804,7 @@ containing a value of this type.
         public static final int strict_sandbox=0x7f070009;
         public static final int submit_area=0x7f07005c;
         public static final int tabMode=0x7f070027;
-        public static final int tempmax=0x7f07008c;
+        public static final int tempmax=0x7f07008d;
         public static final int tempmin=0x7f07008b;
         public static final int terrain=0x7f070003;
         public static final int textView2=0x7f070079;
@@ -1828,7 +1821,14 @@ containing a value of this type.
         public static final int up=0x7f070044;
         public static final int useLogo=0x7f070028;
         public static final int vertical=0x7f070015;
-        public static final int wind=0x7f070091;
+        public static final int w_clouds=0x7f070094;
+        public static final int w_humidity=0x7f070090;
+        public static final int w_pressure=0x7f070092;
+        public static final int w_rain=0x7f070096;
+        public static final int w_tempmax=0x7f07008e;
+        public static final int w_tempmin=0x7f07008c;
+        public static final int w_wind=0x7f070098;
+        public static final int wind=0x7f070097;
         public static final int withText=0x7f070031;
         public static final int wrap_content=0x7f07000d;
     }
@@ -1956,7 +1956,6 @@ containing a value of this type.
         public static final int action_settings=0x7f05002f;
         public static final int action_sign_in_register=0x7f050047;
         public static final int action_sign_in_short=0x7f050048;
-        public static final int animate_label=0x7f050062;
         public static final int app_name=0x7f05002d;
         public static final int auth_client_needs_enabling_title=0x7f050001;
         public static final int auth_client_needs_installation_title=0x7f050002;
@@ -2107,8 +2106,6 @@ containing a value of this type.
          available or up-to-date 
          */
         public static final int wallet_buy_button_place_holder=0x7f05001f;
-        public static final int zoom_in_label=0x7f050060;
-        public static final int zoom_out_label=0x7f050061;
     }
     public static final class style {
         /** 

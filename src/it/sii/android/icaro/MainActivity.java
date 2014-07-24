@@ -69,14 +69,22 @@ public class MainActivity extends ActionBarActivity {
 
 		String mEmail = null;
 
-		// se l'utente si era precedentemente loggato, la mail è salvata nelle
-		// SharedPreferences
-		SharedPreferences settings = getSharedPreferences("datiLogin", 0);
-		mEmail = settings.getString("Email", "");
-		// se esiste una mail salvata nelle preferenze allora il layout
-		// mostra/nasconde
-		// i bottoni sottostanti
-		if (mEmail != "") {
+		SecurePreferences preferences = new SecurePreferences(
+				MainActivity.this,
+				"my-preferences",
+				"3CB585140F41F6D9F1A4EFBB8C93BF9E93A4075E9EF1C6ADB156202C97F4F132",
+				true);
+		mEmail = preferences.getString("Email");
+
+		// // se l'utente si era precedentemente loggato, la mail è salvata
+		// nelle
+		// // SharedPreferences
+		// SharedPreferences settings = getSharedPreferences("datiLogin", 0);
+		// mEmail = settings.getString("Email", "");
+		// // se esiste una mail salvata nelle preferenze allora il layout
+		// // mostra/nasconde
+		// // i bottoni sottostanti
+		if (mEmail != null) {
 			logged();
 		} else {
 			notlogged();
@@ -98,8 +106,16 @@ public class MainActivity extends ActionBarActivity {
 	public void logged() {
 		// setta la TextView all'interno del bottone di logout la mail
 		// dell'account connesso
-		SharedPreferences settings = getSharedPreferences("datiLogin", 0);
-		String mEmail = settings.getString("Email", "");
+		// SharedPreferences settings = getSharedPreferences("datiLogin", 0);
+		// String mEmail = settings.getString("Email", "");
+
+		SecurePreferences preferences = new SecurePreferences(
+				MainActivity.this,
+				"my-preferences",
+				"3CB585140F41F6D9F1A4EFBB8C93BF9E93A4075E9EF1C6ADB156202C97F4F132",
+				true);
+		String mEmail = preferences.getString("Email");
+
 		Button logout = (Button) findViewById(R.id.logoutButton);
 		logout.setText(mEmail);
 
@@ -151,12 +167,21 @@ public class MainActivity extends ActionBarActivity {
 		builder.setMessage(R.string.logout_message);
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
+
 				SharedPreferences settings = getSharedPreferences("datiLogin",
 						0);
 				SharedPreferences.Editor editor = settings.edit();
-				editor.putString("Email", null);
+				// editor.putString("Email", null);
 				editor.putString("_id", null);
 				editor.commit();
+
+				SecurePreferences preferences = new SecurePreferences(
+						MainActivity.this,
+						"my-preferences",
+						"3CB585140F41F6D9F1A4EFBB8C93BF9E93A4075E9EF1C6ADB156202C97F4F132",
+						true);
+				preferences.clear();
+
 				// refresha l'activity
 				Intent intent = getIntent();
 				finish();

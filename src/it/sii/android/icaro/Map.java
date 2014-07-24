@@ -53,7 +53,7 @@ public class Map extends FragmentActivity implements
 	LocationClient mLocationClient;
 	boolean mUpdatesRequested;
 
-	// Variabile per mantenere la posizione corrente
+	// Variabile in cui è salvata la posizione corrente
 	Location mCurrentLocation;
 
 	// Define an object that holds accuracy and frequency parameters
@@ -99,6 +99,7 @@ public class Map extends FragmentActivity implements
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// Decide what to do based on the original request code
+		// TODO qui dovrei dire all'app cosa fare in caso il GPS sia spento
 		switch (requestCode) {
 
 		case CONNECTION_FAILURE_RESOLUTION_REQUEST:
@@ -237,8 +238,6 @@ public class Map extends FragmentActivity implements
 		mMap.addMarker(new MarkerOptions().position(VENEZIA_SL).title(
 				"Venezia S.Lucia"));
 
-		mLocationClient = new LocationClient(this, this, this);
-
 		// Create the LocationRequest object
 		mLocationRequest = LocationRequest.create();
 		// Use high accuracy
@@ -249,7 +248,6 @@ public class Map extends FragmentActivity implements
 		mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
 
 		// Open the shared preferences
-
 		mPrefs = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
 		// Get a SharedPreferences editor
 		mEditor = mPrefs.edit();
@@ -318,7 +316,7 @@ public class Map extends FragmentActivity implements
 	}
 
 	public void updateGeofence() {
-		float RADIUS = 100000;
+		float RADIUS = 35000;
 		if (chosenLatLng == null) {
 			Log.i("ICARO geofence", "no chosenLatLng");
 			return;
@@ -391,8 +389,8 @@ public class Map extends FragmentActivity implements
 	@Override
 	protected void onStop() {
 
-		// Disconnecting the client invalidates it.
-		mLocationClient.disconnect();
+		// se lo disconnetto all'onStop non funziona più il servizio
+		// mLocationClient.disconnect();
 		super.onStop();
 	}
 
@@ -401,11 +399,10 @@ public class Map extends FragmentActivity implements
 
 		mMapView.onDestroy();
 
-		// TODO non vorrei che l'Update finisse una volta che muore l'Activity
-		// ma l'intera App
 		if (mLocationClient.isConnected()) {
 			mLocationClient.removeLocationUpdates(this);
 		}
+		// mLocationClient.disconnect();
 		super.onDestroy();
 	}
 
@@ -512,6 +509,7 @@ public class Map extends FragmentActivity implements
 				+ Double.toString(location.getLatitude()) + ","
 				+ Double.toString(location.getLongitude());
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		// TODO qui dire all'app cosa farne della location
 
 	}
 

@@ -18,11 +18,11 @@ import org.apache.http.message.BasicNameValuePair;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,7 +41,7 @@ import com.google.gson.Gson;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends FragmentActivity {
 	private static final String LOG = "Francesco";
 
 	/**
@@ -314,12 +314,21 @@ public class LoginActivity extends Activity {
 				// Log per vedere cosa mi rende il pacchetto Gson
 				Log.v(LOG, user.getEmail());
 				// Salvo i dati nelle preferenze
+
+				SecurePreferences preferences = new SecurePreferences(
+						LoginActivity.this,
+						"my-preferences",
+						"3CB585140F41F6D9F1A4EFBB8C93BF9E93A4075E9EF1C6ADB156202C97F4F132",
+						true);
+				preferences.put("Email", user.getEmail());
+
 				SharedPreferences settings = getSharedPreferences("datiLogin",
 						0);
 				SharedPreferences.Editor editor = settings.edit();
-				// ci salvo unicamente l'email per non rischiare che mi venga
+				// ci salvo unicamente l'email e id per non rischiare che mi
+				// venga
 				// rubata la pswd.
-				editor.putString("Email", user.getEmail());
+				// editor.putString("Email", user.getEmail());
 				editor.putString("_id", user._id);
 				editor.commit();
 				finish();

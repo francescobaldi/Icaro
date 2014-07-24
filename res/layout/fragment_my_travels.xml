@@ -12,8 +12,6 @@
         android:id="@+id/prenotazioniList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:longClickable="true" >
 
     </ListView>

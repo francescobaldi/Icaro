@@ -31,9 +31,6 @@ public class BuyTickets extends ActionBarActivity implements
 
 	private static final String LOG = "Francesco";
 
-	// DatePicker. Aggiungo come campi di istanza della activity i componenti
-	// textview e button e tre interi che conterranno l'anno, il mese e il
-	// giorno selezionati
 	protected TextView mtextView7;
 	protected Button msetButton;
 	protected TextView mtextView8;
@@ -55,6 +52,8 @@ public class BuyTickets extends ActionBarActivity implements
 	Calendar dateObj1;
 	Calendar dateObj2;
 
+	// dal momento che mi uscivano due AlertDialog faccio il check se è già
+	// checkato o meno cosi da farlo uscire solo una volta
 	boolean mshowed = false;
 	boolean nshowed = false;
 
@@ -72,6 +71,7 @@ public class BuyTickets extends ActionBarActivity implements
 	protected void onStart() {
 		super.onStart();
 
+		// setto il ritorno non visibile di default
 		final TextView returnTicket = (TextView) findViewById(R.id.textView6);
 		returnTicket.setVisibility(View.GONE);
 		final LinearLayout layoutReturn = (LinearLayout) findViewById(R.id.layoutReturn);
@@ -79,6 +79,7 @@ public class BuyTickets extends ActionBarActivity implements
 		final LinearLayout layoutReturn2 = (LinearLayout) findViewById(R.id.layoutReturn02);
 		layoutReturn2.setVisibility(View.GONE);
 
+		// Adapter vari per gli spinner
 		ArrayAdapter<String> adapter = createSpinnerAdapter();
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -101,15 +102,13 @@ public class BuyTickets extends ActionBarActivity implements
 		spinner3.setAdapter(adapter3);
 		spinner5.setAdapter(adapter3);
 
-		// Vengono letti i componenti tramite gli id, viene associato un
-		// listener al bottone che apre un dialog e viene impostata come data la
-		// data odierna.
 		mtextView7 = (TextView) findViewById(R.id.textView7);
 		msetButton = (Button) findViewById(R.id.setButton);
 		mtextView8 = (TextView) findViewById(R.id.textView8);
 		msetButton2 = (Button) findViewById(R.id.setButton2);
 		onewayRadio = (RadioButton) findViewById(R.id.onewayRadio);
 
+		// Listener per i due bottoni set per la data
 		msetButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				showDialog(0);
@@ -122,6 +121,7 @@ public class BuyTickets extends ActionBarActivity implements
 			}
 		});
 
+		// creo un'istanza del calendario
 		final Calendar c = Calendar.getInstance();
 		mYear = c.get(Calendar.YEAR);
 		mMonth = c.get(Calendar.MONTH);
@@ -161,6 +161,8 @@ public class BuyTickets extends ActionBarActivity implements
 			mMonth = monthOfYear;
 			mDay = dayOfMonth;
 			dateObj1.set(mYear, mMonth, mDay);
+
+			// la data scelta deve essere >= a quella odierna
 			if (dateObj1.after(rightNow) || dateObj1.equals(rightNow)) {
 				updateDisplay();
 				Log.v(LOG, "data ok");
@@ -195,8 +197,8 @@ public class BuyTickets extends ActionBarActivity implements
 			nDay = dayOfMonth;
 			dateObj2.set(nYear, nMonth, nDay);
 			dateObj1.set(mYear, mMonth, mDay);
-			// TODO va settato per bene con l'ora di arrivo, non quella di
-			// partenza
+
+			// la data del ritorno deve essere >= a quella di partenza
 			if (dateObj2.after(dateObj1) || dateObj2.equals(dateObj1)) {
 				updateDisplay();
 				Log.v(LOG, "data ok");
@@ -245,16 +247,13 @@ public class BuyTickets extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+
 		getMenuInflater().inflate(R.menu.buy_tickets, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -262,9 +261,6 @@ public class BuyTickets extends ActionBarActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -329,6 +325,8 @@ public class BuyTickets extends ActionBarActivity implements
 		orario2b = toHourMax(spinner5.getSelectedItemPosition());
 
 		Intent intent = new Intent(this, TrainResults.class);
+
+		// parametri da portare nella prossima Activity
 		intent.putExtra("partenza", spinner1.getSelectedItem().toString());
 		intent.putExtra("arrivo", spinner2.getSelectedItem().toString());
 		intent.putExtra("orario1a", String.valueOf(orario1a));
@@ -343,6 +341,7 @@ public class BuyTickets extends ActionBarActivity implements
 		startActivity(intent);
 	}
 
+	// in base al RaioButton premuto setta degli elementi visibili o meno
 	public void noReturn(View view) {
 		final TextView returnTicket = (TextView) findViewById(R.id.textView6);
 		returnTicket.setVisibility(View.GONE);

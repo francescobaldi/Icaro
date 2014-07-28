@@ -37,10 +37,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-/**
- * Activity which displays a login screen to the user, offering registration as
- * well.
- */
 public class LoginActivity extends FragmentActivity {
 	private static final String LOG = "Francesco";
 
@@ -61,7 +57,7 @@ public class LoginActivity extends FragmentActivity {
 	 */
 	private UserLoginTask mAuthTask = null;
 
-	// Values for email and password at the time of the login attempt.
+	// valori per email e password al momento del login attempt
 	private String mEmail;
 	private String mPassword;
 
@@ -79,7 +75,7 @@ public class LoginActivity extends FragmentActivity {
 		setContentView(R.layout.activity_login);
 		setupActionBar();
 
-		// Set up the login form.
+		// setta il login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
@@ -111,13 +107,10 @@ public class LoginActivity extends FragmentActivity {
 				});
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// Show the Up button in the action bar.
+			// mostra il botone di recupero password nella action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
@@ -246,10 +239,6 @@ public class LoginActivity extends FragmentActivity {
 		}
 	}
 
-	/**
-	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
-	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, String> {
 		@Override
 		protected String doInBackground(Void... params) {
@@ -263,7 +252,7 @@ public class LoginActivity extends FragmentActivity {
 			InputStream is;
 			String result = null;
 
-			// Connessione al Server e richiesta al DB tramite index.php
+			// Connessione al Server e richiesta al DB tramite accounts.php
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(URLS.LOGIN);
@@ -311,10 +300,10 @@ public class LoginActivity extends FragmentActivity {
 			} else {
 				Gson GsonIstance = new Gson();
 				Utente user = GsonIstance.fromJson(success, Utente.class);
-				// Log per vedere cosa mi rende il pacchetto Gson
-				Log.v(LOG, user.getEmail());
-				// Salvo i dati nelle preferenze
 
+				Log.v(LOG, user.getEmail());
+
+				// Salvo i dati nelle preferenze
 				SecurePreferences preferences = new SecurePreferences(
 						LoginActivity.this,
 						"my-preferences",
@@ -325,9 +314,7 @@ public class LoginActivity extends FragmentActivity {
 				SharedPreferences settings = getSharedPreferences("datiLogin",
 						0);
 				SharedPreferences.Editor editor = settings.edit();
-				// ci salvo unicamente l'email e id per non rischiare che mi
-				// venga
-				// rubata la pswd.
+
 				// editor.putString("Email", user.getEmail());
 				editor.putString("_id", user._id);
 				editor.commit();

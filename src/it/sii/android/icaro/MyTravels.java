@@ -37,6 +37,7 @@ public class MyTravels extends ActionBarActivity {
 	public void onStart() {
 		super.onStart();
 
+		// chiamata a SQLite
 		DatabaseManager dbHelper = new DatabaseManager(this, "icaro", null,
 				DatabaseManager.DB_VERSION);
 		db = dbHelper.getWritableDatabase();
@@ -70,16 +71,13 @@ public class MyTravels extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.my_travels, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -87,9 +85,6 @@ public class MyTravels extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {

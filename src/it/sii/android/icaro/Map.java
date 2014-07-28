@@ -56,7 +56,7 @@ public class Map extends FragmentActivity implements
 	// Variabile in cui è salvata la posizione corrente
 	Location mCurrentLocation;
 
-	// Define an object that holds accuracy and frequency parameters
+	// definisce un oggetto che tiene accuratezza e frequenza dell'update
 	LocationRequest mLocationRequest;
 
 	// Milliseconds per second
@@ -98,8 +98,7 @@ public class Map extends FragmentActivity implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Decide what to do based on the original request code
-		// TODO qui dovrei dire all'app cosa fare in caso il GPS sia spento
+
 		switch (requestCode) {
 
 		case CONNECTION_FAILURE_RESOLUTION_REQUEST:
@@ -166,10 +165,10 @@ public class Map extends FragmentActivity implements
 	private static final LatLng VENEZIA_SL = new LatLng(45.441393, 12.320459);
 	private static final LatLng ITALIA = new LatLng(41.29246, 12.5736108);
 
+	// questo HashMap viene usato per prendere le coordinate e utilizzarle nel
+	// Geofence
 	public static final HashMap<String, LatLng> CoorDict = new HashMap<String, LatLng>() {
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 1L;
 
 		{
@@ -251,6 +250,7 @@ public class Map extends FragmentActivity implements
 		mPrefs = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
 		// Get a SharedPreferences editor
 		mEditor = mPrefs.edit();
+
 		/*
 		 * Create a new location client, using the enclosing class to handle
 		 * callbacks.
@@ -293,7 +293,7 @@ public class Map extends FragmentActivity implements
 		builder.setNegativeButton(R.string.cancel,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						// non fa nulla
+
 					}
 				});
 		builder.show();
@@ -344,7 +344,6 @@ public class Map extends FragmentActivity implements
 	@Override
 	protected void onStart() {
 
-		// Connect the client.
 		if (servicesConnected()) {
 			mLocationClient.connect();
 		}
@@ -389,7 +388,6 @@ public class Map extends FragmentActivity implements
 	@Override
 	protected void onStop() {
 
-		// se lo disconnetto all'onStop non funziona più il servizio
 		// mLocationClient.disconnect();
 		super.onStop();
 	}
@@ -509,7 +507,6 @@ public class Map extends FragmentActivity implements
 				+ Double.toString(location.getLatitude()) + ","
 				+ Double.toString(location.getLongitude());
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-		// TODO qui dire all'app cosa farne della location
 
 	}
 

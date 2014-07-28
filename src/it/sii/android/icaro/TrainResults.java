@@ -73,6 +73,7 @@ public class TrainResults extends ActionBarActivity implements
 	public void onStart() {
 		super.onStart();
 
+		// prendo il Bundle passato dall'intent di BuyTickets
 		Bundle b = new Bundle();
 		b = getIntent().getExtras();
 		partenza = b.getString("partenza");
@@ -104,16 +105,13 @@ public class TrainResults extends ActionBarActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.train_results, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -121,9 +119,6 @@ public class TrainResults extends ActionBarActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -163,7 +158,7 @@ public class TrainResults extends ActionBarActivity implements
 		builder.setNegativeButton(R.string.cancel,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						// non fa nulla
+
 					}
 				});
 		builder.show();
@@ -183,10 +178,6 @@ public class TrainResults extends ActionBarActivity implements
 		} else if (!soloAndata && andata) {
 			aggiornaLista(arrivo, partenza, orario2a, orario2b, passeggeri,
 					data2);
-
-			// TODO non va messo qui l'aggiornamento della view?
-			// data = (TextView) findViewById(R.id.dataView);
-			// data.setText(this.data2);
 
 		} else if (!soloAndata && !andata) {
 			sendBooking(trenoAndata, data1);
@@ -216,8 +207,6 @@ public class TrainResults extends ActionBarActivity implements
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = httpclient.execute(httppost);
 			if (response.getStatusLine().getStatusCode() != 200) {
-
-				// Gestisci errore
 
 			}
 
@@ -258,9 +247,6 @@ public class TrainResults extends ActionBarActivity implements
 			String ora1, String ora2, final String passeggeri, final String data) {
 		Thread t = new Thread(new Runnable() {
 			public void run() {
-
-				// bundle di extra in arrivo dall'intent dell'activity
-				// BuyTickets
 
 				// array per la chiamata http
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -327,7 +313,6 @@ public class TrainResults extends ActionBarActivity implements
 							}
 						});
 
-						// Log per vedere cosa mi rende il pacchetto Gson
 						Log.v("LOG", treni.toString());
 
 					}

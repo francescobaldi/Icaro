@@ -1,5 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background" >
+        
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="35dp"
@@ -11,20 +17,23 @@
         android:id="@+id/loginButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:onClick="gotoLogin" />
+        android:alpha="1"
+        android:onClick="gotoLogin"
+        android:text="@string/login" />
     
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:onClick="logout" />
+        android:alpha="1"
+        android:onClick="logout"
+        android:text="@string/logout" />
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:alpha="1"
         android:onClick="gotoSearch"
         android:text="@string/title_activity_buy_tickets" />
 
@@ -32,22 +41,27 @@
         android:id="@+id/myTravelsButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_activity_my_travels" 
-        android:onClick="gotoTravels"/>
+        android:alpha="1"
+        android:onClick="gotoTravels"
+        android:text="@string/title_activity_my_travels" />
 
     <Button
         android:id="@+id/newsButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="@string/news"
-        android:onClick="gotoNews" />
+        android:alpha="1"
+        android:onClick="gotoNews"
+        android:text="@string/news" />
 
     <Button
         android:id="@+id/mapButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:alpha="1"
         android:onClick="gotoMap"
         android:text="@string/map" />
 
 </LinearLayout>
+
+ </RelativeLayout>

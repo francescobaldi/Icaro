@@ -30,16 +30,12 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -47,9 +43,6 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -76,14 +69,13 @@ public class MainActivity extends ActionBarActivity {
 				true);
 		mEmail = preferences.getString("Email");
 
-		// // se l'utente si era precedentemente loggato, la mail è salvata
-		// nelle
-		// // SharedPreferences
+		// se l'utente si era precedentemente loggato, la mail è salvata
+		// nelle SecurePreferences.
+		// prima le salvavamo nelle Shared normali
 		// SharedPreferences settings = getSharedPreferences("datiLogin", 0);
 		// mEmail = settings.getString("Email", "");
-		// // se esiste una mail salvata nelle preferenze allora il layout
-		// // mostra/nasconde
-		// // i bottoni sottostanti
+		// se esiste una mail salvata nelle preferenze allora viene chiamato il
+		// metodo logged()
 		if (mEmail != null) {
 			logged();
 		} else {
@@ -104,8 +96,10 @@ public class MainActivity extends ActionBarActivity {
 	public static int LOGIN_ACTIVITY_REQUEST = 1;
 
 	public void logged() {
+
 		// setta la TextView all'interno del bottone di logout la mail
-		// dell'account connesso
+		// dell'account connesso (prima si chiamavano le Shared poi abbiamo
+		// cambiato.
 		// SharedPreferences settings = getSharedPreferences("datiLogin", 0);
 		// String mEmail = settings.getString("Email", "");
 
@@ -191,7 +185,7 @@ public class MainActivity extends ActionBarActivity {
 		builder.setNegativeButton(R.string.cancel,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						// non fa nulla
+
 					}
 				});
 		builder.show();
